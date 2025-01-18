@@ -1,0 +1,132 @@
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api-gateway/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8080
+    env_file:
+      - ./api-gateway/.env
+
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./auth-service/src:/usr/src/app/src
+      - ./auth-service/uploads:/usr/src/app/uploads
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8081
+
+  products-service:
+    build: ./products-service
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./products-service/src:/usr/src/app/src
+      - ./products-service/uploads:/usr/src/app/uploads
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8082
+
+  store-service:
+    build: ./store-service
+    ports:
+      - "8083:8083"
+    volumes:
+      - ./store-service/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8083
+
+  cart-service:
+    build: ./cart-service
+    ports:
+      - "8084:8084"
+    volumes:
+      - ./cart-service/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8084
+
+  search-service:
+    build: ./search-service
+    ports:
+      - "8085:8085"
+    volumes:
+      - ./search-service/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8085
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./order-service/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8086
+
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "8087:8087"
+    volumes:
+      - ./payment-service/src:/usr/src/app/src
+    command: npm run dev
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - PORT=8087
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+
+  db:
+    image: postgres:latest
+    container_name: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: quannguyen
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: DACN
+    volumes:
+      - ./postgres_db:/var/lib/postgresql/data

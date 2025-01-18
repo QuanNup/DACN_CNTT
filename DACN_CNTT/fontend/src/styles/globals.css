@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Black Ops One";
+    src: url("/fonts/BlackOpsOne-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.custom-modal button[aria-label="Close"] {
+    display: none;
+    /* Ẩn nút Close */
+}
+
+.custom-modal .nextui-modal {
+    width: 900px;
+    /* Tăng chiều rộng */
+    max-width: 90%;
+    /* Đảm bảo responsive */
+    height: 600px;
+    /* Tăng chiều cao */
+    max-height: 90%;
+    /* Giới hạn chiều cao */
+}
+
+.swiper-pagination-bullet {
+    background: var(--pagination-bullet-color) !important;
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    border-radius: 50%;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: unset !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--pagination-bullet-active-color) !important;
+    opacity: 1;
+}
+
+html.light {
+    --pagination-bullet-color: #333;
+    --pagination-bullet-active-color: #000;
+}
+
+html.dark {
+    --pagination-bullet-color: #ccc;
+    --pagination-bullet-active-color: #fff;
+}
+
+html {
+    scrollbar-width: none;
+    overflow-y: auto;
+}
+
+.layout-container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 13% 80% 7%;
+    /* Header, Content, Footer */
+    grid-template-columns: 20% 80%;
+    /* Sidebar 20%, Content 80% */
+    grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer";
+}
+
+.layout-container-manager {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 20% 80%;
+    /* Sidebar 20%, Content 80% */
+    grid-template-areas:
+        "sidebar content"
+}
+
+
+
+@media (max-width: 1250px) {
+    .layout-container {
+        grid-template-columns: 10% 90%;
+        /* Sidebar 20%, Content 80% */
+    }
+}
+
+@media (max-width: 768px) {
+    .layout-container {
+        grid-template-columns: 0% 100%;
+        /* Sidebar 20%, Content 80% */
+    }
+}
+
+  

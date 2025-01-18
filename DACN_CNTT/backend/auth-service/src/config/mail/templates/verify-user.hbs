@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác thực tài khoản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555555;
+        }
+
+        .activation-code {
+            background-color: #f2f2f2;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #333333;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888888;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <img src="cid:uniqueLogoCid" alt="Logo" style="display: block; margin: 0 auto 20px; max-width: 150px;">
+
+        <!-- Greeting -->
+        <h1>Xin chào {{name}},</h1>
+        <p>Xác thực tài khoản của bạn trên trang thương mại điện tử <strong>QQ E-commerce</strong>!
+        </p>
+
+        <!-- Activation instructions -->
+        <p>Cảm ơn bạn đã lựa chọn <strong>QQ E-commerce</strong>. Để hoàn tất quá xác thực, vui lòng sử dụng mã xác
+            thực bên dưới để hoàn tất quá trình xác thực của bạn:</p>
+
+        <!-- Activation code -->
+        <div class="activation-code">
+            {{activationCode}}
+        </div>
+
+        <!-- Expiration note -->
+        <p>Mã này sẽ hết hạn sau <strong>5 phút</strong>.</p>
+
+        <!-- Ignore message -->
+        <p>Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email này.</p>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Trân trọng,<br>Đội ngũ hỗ trợ QQ E-commerce</p>
+        </div>
+    </div>
+</body>
+
+</html>
